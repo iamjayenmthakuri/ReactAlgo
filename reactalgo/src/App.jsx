@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import { Button, Flex, Grid, Heading } from "@chakra-ui/react";
+import { Button, Flex, Grid, Heading, Text } from "@chakra-ui/react";
 import { Alert } from "antd";
 
 function TodoList() {
@@ -28,6 +28,7 @@ function TodoList() {
     }, 1000);
     return () => clearTimeout(timer);
   }, []);
+  console.log(todos);
 
   const alertColor = (completed) => {
     if (completed === true) {
@@ -49,6 +50,7 @@ function TodoList() {
       <Heading display={"flex"} alignItems={"center"} justifyContent={"center"}>
         Simple Algo Learning
       </Heading>
+
       <Flex justifyContent={"center"}>
         <Grid
           gap={5}
@@ -61,15 +63,17 @@ function TodoList() {
           <Button onClick={handleCompleted}>Completed</Button>
           {Shows ? (
             <>
-              {completedTodos.map((todo) => (
-                <Alert
-                  key={todo.id}
-                  message="Completed"
-                  type={alertColor(todo.completed)}
-                  description={todo.title}
-                  showIcon
-                  closable
-                />
+              {completedTodos.map((todo, index) => (
+                <>
+                  <Text key={todo.id}>{index + 1}</Text>
+                  <Alert
+                    message="Completed"
+                    type={alertColor(todo.completed)}
+                    description={todo.title}
+                    showIcon
+                    closable
+                  />
+                </>
               ))}
             </>
           ) : null}
@@ -85,15 +89,17 @@ function TodoList() {
           <Button onClick={handleInCompleted}>Incompleted</Button>
           {Show ? (
             <>
-              {incompleteTodos.map((todo) => (
-                <Alert
-                  key={todo.id}
-                  message="Incomplete"
-                  type={alertColor(todo.completed)}
-                  description={todo.title}
-                  showIcon
-                  closable
-                />
+              {incompleteTodos.map((todo, index) => (
+                <>
+                  <Text key={todo.id}>{index + 1}</Text>
+                  <Alert
+                    message="Incomplete"
+                    type={alertColor(todo.completed)}
+                    description={todo.title}
+                    showIcon
+                    closable
+                  />
+                </>
               ))}
             </>
           ) : null}
