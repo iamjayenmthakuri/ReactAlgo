@@ -15,8 +15,7 @@ function TodoList() {
         setTodos(todos);
       };
       fetchTodos();
-    }, 3000);
-
+    }, 1000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -44,6 +43,7 @@ function TodoList() {
           margin: "10px",
         }}
       >
+        Completed
         {completedTodos.map((todo) => (
           <Alert
             key={todo.id}
@@ -62,6 +62,7 @@ function TodoList() {
           margin: "10px",
         }}
       >
+        InCompleted
         {incompleteTodos.map((todo) => (
           <Alert
             key={todo.id}
