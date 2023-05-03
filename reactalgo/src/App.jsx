@@ -1,9 +1,19 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import { Alert, Space } from "antd";
+import { Button, Flex, Grid, Heading, Text } from "@chakra-ui/react";
+import { Alert } from "antd";
 
 function TodoList() {
   const [todos, setTodos] = useState([]);
+  const [Show, setShow] = useState(false);
+  const [Shows, setShows] = useState(false);
+
+  const handleInCompleted = () => {
+    setShow(!Show);
+  };
+  const handleCompleted = () => {
+    setShows(!Shows);
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -29,51 +39,66 @@ function TodoList() {
 
   const completedTodos = todos
     .filter((todo) => todo.completed === true)
-    .slice(0, 10);
+    .slice(0, 5);
   const incompleteTodos = todos
     .filter((todo) => todo.completed === false)
-    .slice(0, 10);
+    .slice(0, 5);
 
   return (
     <>
-      <Space
-        direction="vertical"
-        style={{
-          width: "45%",
-          margin: "10px",
-        }}
-      >
-        Completed
-        {completedTodos.map((todo) => (
-          <Alert
-            key={todo.id}
-            message="Completed"
-            type={alertColor(todo.completed)}
-            description={todo.title}
-            showIcon
-            closable
-          />
-        ))}
-      </Space>
-      <Space
-        direction="vertical"
-        style={{
-          width: "45%",
-          margin: "10px",
-        }}
-      >
-        InCompleted
-        {incompleteTodos.map((todo) => (
-          <Alert
-            key={todo.id}
-            message="Incomplete"
-            type={alertColor(todo.completed)}
-            description={todo.title}
-            showIcon
-            closable
-          />
-        ))}
-      </Space>
+      <Heading display={"flex"} alignItems={"center"} justifyContent={"center"}>
+        Simple Algo Learning
+      </Heading>
+      <Flex justifyContent={"center"}>
+        <Grid
+          gap={5}
+          style={{
+            width: "25%",
+            height: "min-content",
+            margin: "10px",
+          }}
+        >
+          <Button onClick={handleCompleted}>Completed</Button>
+          {Shows ? (
+            <>
+              {completedTodos.map((todo) => (
+                <Alert
+                  key={todo.id}
+                  message="Completed"
+                  type={alertColor(todo.completed)}
+                  description={todo.title}
+                  showIcon
+                  closable
+                />
+              ))}
+            </>
+          ) : null}
+        </Grid>
+        <Grid
+          gap={5}
+          style={{
+            width: "25%",
+            margin: "10px",
+            height: "10%",
+          }}
+        >
+          <Button onClick={handleInCompleted}>Incompleted</Button>
+          {Show ? (
+            <>
+              {incompleteTodos.map((todo) => (
+                <Alert
+                  key={todo.id}
+                  message="Incomplete"
+                  type={alertColor(todo.completed)}
+                  description={todo.title}
+                  showIcon
+                  closable
+                />
+              ))}
+            </>
+          ) : null}
+        </Grid>
+      </Flex>
     </>
   );
 }
