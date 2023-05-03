@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import { Button, Flex, Grid, Heading, Text } from "@chakra-ui/react";
+import { Button, Flex, Grid, Heading } from "@chakra-ui/react";
 import { Alert } from "antd";
 
 function TodoList() {
